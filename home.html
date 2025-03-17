@@ -3,18 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITBleaks</title>
-    <link rel="stylesheet" href="/css/home.css">  
+    <title>Calculadora de Ahorro de Energía</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="nav-buttons">
-        <a href="/html/home.html" class="button"><span class="emoji">🏠</span> Home</a>
-        <a href="/html/p2.html" class="button"><span class="emoji">📘</span> Introducción</a>
-        <a href="calculator.html" class="button"><span class="emoji">🧮</span> Calculator</a>
-    </div> 
-
     <div class="container">
-        <h1><span class="itb">ITB</span> <span class="leaks changing-text"></span></h1>
+        <!-- Sección del Logo -->
+        <div class="logo">
+            <img src="imagen/lol.gif" alt="Logo" style="width: 150px; height: auto;">
+        </div>
+
+        <h1>Calculadora de Ahorro de Energía</h1>
+        <form id="calculator-form">
+            <h2>Consumo de Electricidad</h2>
+            <label for="electricity-annual">Consumo Anual (kWh):</label>
+            <input type="number" id="electricity-annual" required>
+            <label for="electricity-percent">Consumo Diario (% del anual):</label>
+            <input type="number" id="electricity-percent" required>
+            <button type="button" onclick="calculateElectricity()">Calcular Electricidad</button>
+            <p id="electricity-result"></p>
+
+            <div class="container">
+                
+                <div class="logo">
+                    <img src="imagen/water.gif" alt="Logo" style="width: 150px; height: auto;">
+                </div>
+
+            <h2>Consumo de Agua</h2>
+            <label for="water-annual">Consumo Anual (litros):</label>
+            <input type="number" id="water-annual" required>
+            <label for="water-percent">Consumo Diario (% del anual):</label>
+            <input type="number" id="water-percent" required>
+            <button type="button" onclick="calculateWater()">Calcular Agua</button>
+            <p id="water-result"></p>
+
+            <h2>Consumibles de Oficina</h2>
+            <label for="consumables-annual">Consumo Anual (unidades):</label>
+            <input type="number" id="consumables-annual" required>
+            <label for="consumables-percent">Consumo Diario (% del anual):</label>
+            <input type="number" id="consumables-percent" required>
+            <button type="button" onclick="calculateConsumables()">Calcular Consumibles</button>
+            <p id="consumables-result"></p>
+
+            <h2>Productos de Limpieza</h2>
+            <label for="cleaning-annual">Consumo Anual (unidades):</label>
+            <input type="number" id="cleaning-annual" required>
+            <label for="cleaning-percent">Consumo Diario (% del anual):</label>
+            <input type="number" id="cleaning-percent" required>
+        </form>
     </div>
+
+    <script>
+        function calculateElectricity() {
+            const annual = parseFloat(document.getElementById('electricity-annual').value);
+            const percent = parseFloat(document.getElementById('electricity-percent').value);
+            if (isNaN(annual) || isNaN(percent) || annual <= 0 || percent < 0) {
+                document.getElementById('electricity-result').innerText = 'Los datos no son calculables';
+            } else {
+                const dailyConsumption = (annual * percent) / 100;
+                const monthlyConsumption = dailyConsumption * 30;
+                const yearlyConsumption = dailyConsumption * 365;
+                document.getElementById('electricity-result').innerText = `Consumo Diario: ${dailyConsumption.toFixed(2)} kWh\nConsumo Mensual: ${monthlyConsumption.toFixed(2)} kWh\nConsumo Anual: ${yearlyConsumption.toFixed(2)} kWh`;
+            }
+        }
+
+        function calculateWater() {
+            const annual = parseFloat(document.getElementById('water-annual').value);
+            const percent = parseFloat(document.getElementById('water-percent').value);
+            if (isNaN(annual) || isNaN(percent) || annual <= 0 || percent < 0) {
+                document.getElementById('water-result').innerText = 'Los datos no son calculables';
+            } else {
+                const dailyConsumption = (annual * percent) / 100;
+                const monthlyConsumption = dailyConsumption * 30;
+                const yearlyConsumption = dailyConsumption * 365;
+                document.getElementById('water-result').innerText = `Consumo Diario: ${dailyConsumption.toFixed(2)} litros\nConsumo Mensual: ${monthlyConsumption.toFixed(2)} litros\nConsumo Anual: ${yearlyConsumption.toFixed(2)} litros`;
+            }
+        }
+
+        function calculateConsumables() {
+            const annual = parseFloat(document.getElementById('consumables-annual').value);
+            const percent = parseFloat(document.getElementById('consumables-percent').value);
+            if (isNaN(annual) || isNaN(percent) || annual <= 0 || percent < 0) {
+                document.getElementById('consumables-result').innerText = 'Los datos no son calculables';
+            } else {
+                const dailyConsumption = (annual * percent) / 100;
+                const monthlyConsumption = dailyConsumption * 30;
+                const yearlyConsumption = dailyConsumption * 365;
+                document.getElementById('consumables-result').innerText = `Consumo Diario: ${dailyConsumption.toFixed(2)} unidades\nConsumo Mensual: ${monthlyConsumption.toFixed(2)} unidades\nConsumo Anual: ${yearlyConsumption.toFixed(2)} unidades`;
+            }
+        }
+    </script>
 </body>
 </html>
